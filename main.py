@@ -27,7 +27,7 @@ smtpPort = int(input("Digite uma porta: "))
 
 mailFrom = input("Email REMETENTE: ")
 
-mailFromKey = input("Informe a senha de email REMETENTE: ")
+mailFromKey = getpass.getpass("Informe a senha de email REMETENTE: ")
 
 mailTo = input("Email DESTINATÁRIO: ")
 
