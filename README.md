@@ -22,14 +22,14 @@ Clique com o botão direito sobre o arquivo **main.py** e escolha **Abrir com > 
 
 Ou
 
-Abra o CMD e navegue até a pasta onde está o arquivo **main.py**, e digite **_python main.py_**.
+Abra o CMD e navegue até a pasta onde está o arquivo **main.py**, digite **_python main.py_**  e pressione **Enter**.
 
 
 ###### No Linux:
 
 1. Abra o TERMINAL do linux, na mesma pasta onde está o arquivo **main.py**;
 2. Para executar o interpretador, utilize o comando **python3** e dê enter;
-3. Agora, na frente do marcador **>>>**, digite **_exec(open('main.py').read())_**
+3. Agora, na frente do marcador >>>, digite **_exec(open('main.py').read())_** e pressione **Enter**.
 
 ###### No Mac:
 
@@ -37,4 +37,4 @@ Clique com o botão direito sobre o arquivo **main.py** e escolha **Abrir com > 
 
 Ou
 
-Abra o TERMINAL e navegue até a pasta onde está o arquivo **main.py**, e digite **_python main.py_**.
+Abra o TERMINAL e navegue até a pasta onde está o arquivo **main.py**, digite **_python main.py_** e pressione **Enter**.
