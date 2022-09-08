@@ -7,54 +7,83 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-print("------------------------------------------")
-print(" Olá, bem vindo ao Desafio SendMailPython!")
-print(" Por: Elismar Ramos")
-print("------------------------------------------")
-print("   ")
-print("   ")
+#Opção para enviar novo email
+def get_restart():
 
-# Instancia as varáveis de envio
-smtpServer = input("Informe o servidor SMTP (Ex: smtp.seudominio.com): ")
+    print("   ")
+    print("   ")
 
-print("  ")
-print("Escolha da porta conforme provedor SMTP:")
-print("25 - Sem autenticação.")
-print("465 - Autenticação SSl.")
-print("587 - Autenticação TLS.")
-print("  ")
-smtpPort = int(input("Digite uma porta: "))
+    restartSendMail = input("Gostaria de enviar novo email? [s,n]: ")
 
-mailFrom = input("Email REMETENTE: ")
+    if restartSendMail == 's':
 
-mailFromKey = getpass.getpass("Informe a senha de email REMETENTE: ")
+        print("   ")
+        print("   ")
+        get_start()
 
-mailTo = input("Email DESTINATÁRIO: ")
+    else:
 
-mailSubject = input("Assunto do email: ")
+        get_finalize()
 
-mailMessage = input("Mensagem: ")
-print("   ")
-print("   ")
+#Finaliza a execução do console
+def get_finalize():
 
-# Resumo do envio
-print("o Email será enviado da seguinte forma: ")
-print("   ")
-print("   ")
+    print("   ")
+    print("   ")
+    print("O console será finalizado!")
+    print("   ")
 
-print("De: " + mailFrom)
-print("Para: " + mailTo)
-print("Assunto: " + mailSubject)
-print("Mensagem: " + mailMessage)
-print("   ")
-print("   ")
+    # Exige interação para fechar o console
+    os.system("PAUSE")
 
-# Condiciona o envio
-sendMail = input("Confirma o envio do email? [s,n]")
-print("   ")
-print("   ")
+#Inicio
+def get_start():
+    print("------------------------------------------")
+    print(" Olá, bem vindo ao Desafio SendMailPython!")
+    print(" Por: Elismar Ramos")
+    print("------------------------------------------")
+    print("   ")
+    print("   ")
 
-if sendMail == 's':
+    # Instancia as varáveis de envio
+    smtpServer = input("Informe o servidor SMTP (Ex: smtp.seudominio.com): ")
+
+    print("  ")
+    print("Escolha da porta conforme provedor SMTP:")
+    print("25 - Sem autenticação.")
+    print("465 - Autenticação SSl.")
+    print("587 - Autenticação TLS.")
+    print("  ")
+    smtpPort = int(input("Digite uma porta: "))
+
+    mailFrom = input("Email REMETENTE: ")
+
+    mailFromKey = getpass.getpass("Informe a senha de email REMETENTE: ")
+
+    mailTo = input("Email DESTINATÁRIO: ")
+
+    mailSubject = input("Assunto do email: ")
+
+    mailMessage = input("Mensagem: ")
+    print("   ")
+    print("   ")
+
+    # Resumo do envio
+    print("o Email será enviado da seguinte forma: ")
+    print("   ")
+    print("   ")
+
+    print("De: " + mailFrom)
+    print("Para: " + mailTo)
+    print("Assunto: " + mailSubject)
+    print("Mensagem: " + mailMessage)
+    print("   ")
+    print("   ")
+
+    # Condiciona o envio
+    sendMail = input("Confirma o envio do email? [s,n]: ")
+
+    if sendMail == 's':
 
         # Instancia objeto da mensagem
         mensagem = MIMEMultipart()
@@ -66,31 +95,33 @@ if sendMail == 's':
 
         # Corpo do email
         mensagem.attach(MIMEText(mailMessage))
-
         print("Autenticando no servidor SMTP...")
-
         if smtpPort == 25:
 
-                server = smtplib.SMTP(smtpServer, smtpPort)
+            server = smtplib.SMTP(smtpServer, smtpPort)
 
         elif smtpPort == 465:
 
-                server = smtplib.SMTP_SSL(smtpServer, smtpPort)
+            server = smtplib.SMTP_SSL(smtpServer, smtpPort)
 
-                # Loga no servidor de email
-                server.login(mensagem['From'], mailFromKey)
+            # Loga no servidor de email
+            server.login(mensagem['From'], mailFromKey)
 
         elif smtpPort == 587:
 
-                server = smtplib.SMTP(smtpServer, smtpPort)
+            server = smtplib.SMTP(smtpServer, smtpPort)
 
-                # Inicia o servidor
-                print('Iniciando TLS...')
-                server.starttls()
+        else:
 
-                # Loga no servidor de email
-                server.login(mensagem['From'], mailFromKey)
+            print("Porta não informada, favor tentar novamente.")
+            get_restart()
 
+        # Inicia o servidor
+        print('Iniciando TLS...')
+        server.starttls()
+
+        # Loga no servidor de email
+        server.login(mensagem['From'], mailFromKey)
 
         # Envia o email
         print('Enviando email...aguarde!')
@@ -101,21 +132,19 @@ if sendMail == 's':
         server.quit()
 
         print("Email enviado com sucesso para %s: " % (mensagem['To']))
+        print("   ")
+        print("-----x------x------x-----x------x-------x-------x-------")
+        get_restart()
 
-        # Mantem o console aberto
-        os.system("PAUSE")
+    elif sendMail == 'n':
 
-elif sendMail == 'n':
+        print('Email não enviado, os dados foram descartados.')
+        get_restart()
 
-    print('Email não enviado, os dados foram descartados.')
-    print("   ")
+        print("   ")
 
-else:
+    else:
 
-    print('Sem confirmação ou informações incompletas.')
-
-print("   ")
-print("   ")
-
-# Mantem o console aberto
-os.system("PAUSE")
+        print('Sem confirmação ou informações incompletas.')
+        get_restart()
+get_start()
