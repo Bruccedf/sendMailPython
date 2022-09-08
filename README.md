@@ -1,6 +1,6 @@
 # Desafio sendMailPython
-_Envio de email em Python e Smtplib via console_
-_Por: Elismar Ramos_
+> _Envio de email em Python e Smtplib via console_
+> _Por: Elismar Ramos_
 
 Script para envio simples de email por meio de variáveis requisitadas durante a execução.
 
